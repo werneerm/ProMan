@@ -1,4 +1,6 @@
 import csv
+import connection
+from psycopg2 import sql
 
 STATUSES_FILE = './data/statuses.csv'
 BOARDS_FILE = './data/boards.csv'
@@ -43,8 +45,19 @@ def get_statuses(force=False):
     return _get_data('statuses', STATUSES_FILE, force)
 
 
-def get_boards(force=False):
-    return _get_data('boards', BOARDS_FILE, force)
+# def get_boards(force=False):
+#     return _get_data('boards', BOARDS_FILE, force)
+
+
+@connection.connection_handler
+def get_boards(cursor, force=False):
+    cursor.execute("""
+                    SELECT * FROM boards
+                    ORDER BY id;
+                   """,
+                   )
+    boards = cursor.fetchall()
+    return boards, force
 
 
 def get_cards(force=False):
