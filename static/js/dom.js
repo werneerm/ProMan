@@ -16,8 +16,12 @@ export let dom = {
         // it adds necessary event listeners also
 
         let boardList = '';
-
+        console.log(boards);
+        console.log(boards.title);
+        console.log(boards.id);
         for(let board of boards){
+            dom.loadCards(board.id);
+            console.log(board);
             boardList += `
                 <li>${board.title}</li>
             `;
@@ -30,14 +34,19 @@ export let dom = {
         `;
 
         let boardsContainer = document.querySelector('#boards');
+        boardsContainer.textContent = '';
         boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
     },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
+        dataHandler.getCardsByBoardId(boardId,function (cards) {
+            dom.showCards(cards)
+        })
     },
     showCards: function (cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
+        console.log(cards);
     },
     // here comes more features
 };
