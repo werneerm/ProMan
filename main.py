@@ -42,10 +42,16 @@ def main():
 
 
 
-# @app.route("/get-status")
-# @json_response
-# def get_status_for_card(status_id):
-#
+@app.route("/get-status/<int:status_id>")
+@json_response
+def get_status_for_card(status_id: int):
+    return data_handler.get_card_status(status_id)
+
+
+@app.route('/statuses')
+@json_response
+def get_all_status():
+    return data_handler.get_statuses()
 
 if __name__ == '__main__':
     main()
