@@ -56,6 +56,15 @@ export let dataHandler = {
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-    }
+    },
     // here comes more features
+    changeBoardTitle: function () {
+            let textareas = document.querySelectorAll('.boardTitle')
+            for (let num=0; num < textareas.length; num++) {
+                textareas[num].addEventListener('blur', (event)=>{
+                    let change = event.target.value;
+                    console.log(change);
+                })
+            }
+        },
 };
