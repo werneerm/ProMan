@@ -38,6 +38,7 @@ export let dom = {
              boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
             }
         }
+
         // const outerHtml = `
         //     <ul class="board-container">
         //         ${boardList}
@@ -99,8 +100,8 @@ export let dom = {
                 if (card.status_id == card_place.id) {
                 let cardToImport = `
                 <div class="card">
+                <div class="board-column-title">${card.title}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                <div class="card-title">${card.title}</div>
                 </div>
                 `;
                 const outerHtml = `
