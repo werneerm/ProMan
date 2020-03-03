@@ -21,9 +21,9 @@ export let dom = {
         console.log(boards.id);
         for(let board of boards){
             dom.loadCards(board.id);
-            console.log(board);
+            console.log(board[0].title);
             boardList += `
-                <li>${board.title}</li>
+                <li>${board[0].title}</li>
             `;
         }
 
