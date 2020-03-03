@@ -65,14 +65,13 @@ export let dom = {
     showCards: function (cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        // console.log(cards);
         let cards_place = document.querySelectorAll('.cards');
         for (let card of cards) {
-            console.log(card);
             for (let card_place of cards_place) {
             if (card.board_id == card_place.id) {
                 let cardToImport = `
                 <div class="card">
+                <div class="board-column-title">${card.status_id}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title">${card.title}</div>
                 </div>

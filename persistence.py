@@ -1,4 +1,7 @@
 import csv
+
+from psycopg2._psycopg import cursor
+
 import connection
 from psycopg2 import sql
 
@@ -41,8 +44,15 @@ def clear_cache():
         _cache.pop(k)
 
 
-def get_statuses(force=False):
-    return _get_data('statuses', STATUSES_FILE, force)
+# @connection.connection_handler
+# def get_statuses(cursor, id):
+#     cursor.execute("""
+#                 SELECT * FROM statuses
+#                 WHERE   statuses.id = %(id)s
+#     """, {'id':id})
+#
+#     statuses = cursor.fetchall()
+#     return statuses
 
 
 # def get_boards(force=False):
