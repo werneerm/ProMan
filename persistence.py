@@ -59,6 +59,15 @@ def get_boards(cursor, force=False):
     boards = cursor.fetchall()
     return boards, force
 
+@connection.connection_handler
+def get_cards_SQL(cursor, board_id):
+    cursor.execute("""
+    SELECT * FROM cards
+    WHERE board_id=%(board_id)s
+    ORDER BY id;
+    """, {'board_id': board_id})
+    cards = cursor.fetchall()
+    return cards
 
 def get_cards(force=False):
     return _get_data('cards', CARDS_FILE, force)

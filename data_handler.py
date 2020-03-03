@@ -18,6 +18,13 @@ def get_boards():
     """
     return persistence.get_boards(force=True)
 
+def get_cards_for_board_from_SQL(board_id):
+    matching_cards = []
+    all_cards = persistence.get_cards_SQL(board_id)
+    for row in all_cards:
+        matching_cards.append(row)
+    print(matching_cards)
+    return matching_cards
 
 def get_cards_for_board(board_id):
     persistence.clear_cache()
