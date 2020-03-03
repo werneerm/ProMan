@@ -16,12 +16,10 @@ export let dom = {
         // it adds necessary event listeners also
         let boardsContainer = document.querySelector('#boards');
         let boardList = '';
-        // console.log(boards.length);
         let boards_length = boards.length;
         for(let board of boards){
             for (let item=0; item < boards_length; item++) {
                 dom.loadCards(board[item].id);
-                // console.log(board[item]);
                 boardList += `
                 <div class="board-header"><span class="board-title">${board[item].title}</span>
                 </div>
@@ -29,32 +27,18 @@ export let dom = {
                 
                 </div>
             `;
-                 const outerHtml = `
+                const outerHtml = `
            <section class="board">
                 ${boardList}
              </section>
               `;
-                 // console.log(outerHtml);
-             boardsContainer.textContent = '';
-             boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
+                // console.log(outerHtml);
+                boardsContainer.textContent = '';
+                boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
             }
-            // dom.loadCards(board[1].id);
-            // console.log(board[1].title);
-            // boardList += `
-            //     <li>${board.title}</li>
-            // `;
 
         }
 
-        // const outerHtml = `
-        //     <ul class="board-container">
-        //         ${boardList}
-        //     </ul>
-        // `;
-
-        // let boardsContainer = document.querySelector('#boards');
-        // boardsContainer.textContent = '';
-        // boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
     },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
@@ -69,7 +53,6 @@ export let dom = {
         for (let card of cards) {
             for (let card_place of cards_place) {
             if (card.board_id == card_place.id) {
-                console.log("kek");
                 let cardToImport = `
                 <div class="card">
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
@@ -82,4 +65,5 @@ export let dom = {
         }
     },
     // here comes more features
+
 };
