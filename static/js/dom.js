@@ -69,9 +69,9 @@ export let dom = {
         for (let card of cards) {
             for (let card_place of cards_place) {
             if (card.board_id == card_place.id) {
-                console.log("kek");
                 let cardToImport = `
                 <div class="card">
+                <div class="board-column-title">${card.title}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title">${card.title}</div>
                 </div>
