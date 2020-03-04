@@ -1,5 +1,5 @@
 // It uses data_handler.js to visualize elements
-import { dataHandler } from "./data_handler.js";
+import {dataHandler} from "./data_handler.js";
 
 export let dom = {
     init: function () {
@@ -14,6 +14,9 @@ export let dom = {
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
+        console.log(boards);
+        let title = document.querySelector('#titleOne');
+        title.innerHTML = boards[0][0]['title'];
         let boardsContainer = document.querySelector('.board-container');
         let boardList = '';
         let boards_length = boards.length;
@@ -100,9 +103,10 @@ export let dom = {
         for (let card of cards) {
             for (let card_place of cards_place) {
                 console.log(card_place.id);
-                if (card.status_id == card_place.id && card.board_id == boardID.id) {
+                if (card.status_id == card_place.id) {
                 let cardToImport = `
                 <div class="card">
+                <div class="board-column-title">${card.title}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title">${card.title}</div>
                 </div>
@@ -112,7 +116,7 @@ export let dom = {
               ${cardToImport}
               </div>
                 `;
-                   card_place.insertAdjacentHTML("beforeend", outerHtml);
+                   // card_place.insertAdjacentHTML("beforeend", outerHtml);
                  // card_place.insertAdjacentHTML("beforeend", cardToImport);
             }
             }
