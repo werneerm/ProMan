@@ -1,5 +1,5 @@
 // It uses data_handler.js to visualize elements
-import { dataHandler } from "./data_handler.js";
+import {dataHandler} from "./data_handler.js";
 
 export let dom = {
     init: function () {
@@ -14,29 +14,30 @@ export let dom = {
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-        let boardsContainer = document.querySelector('#boards');
+        console.log(boards);
+        let title = document.querySelector('#titleOne');
+        title.innerHTML = boards[0][0]['title'];
+        let boardsContainer = document.querySelector('.board-container');
         let boardList = '';
         let boards_length = boards.length;
-        dom.loadStatus();
-        for(let board of boards){
-            for (let item=0; item < boards_length; item++) {
-                // console.log(board[item]);
-                boardList += `
-                <section class="board">
-                <div class="board-header"><span class="board-title">${board[item].title}</span>
-                </div>
-                <div class="board-columns" id="${board[item].id}"></div>
-                </section>
-            `;
-                 const outerHtml = `
-           <div class ="board-container">
-                ${boardList}
-              </div>
-`;
-                 // console.log(outerHtml);
-             boardsContainer.textContent = '';
-             boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
-            }
+        let fullBoard = document.querySelector('.board');
+        for(let item =1; item < boards.length; item++){
+                 // for (let item = 0; item < boards_length; item++) {
+                     let cln = fullBoard.cloneNode(true);
+                     cln.id = item+1;
+                     boardsContainer.appendChild(cln);
+                     // console.log(board[item]);
+//                          boardList += `
+//                 <div class="board-header"><span class="board-title">${board[item].title}</span>
+//                 </div>
+//                 <div class="board-columns" id="${board[item].id}"></div>
+//
+// `;
+//                          // console.log(outerHtml);
+//                          boardsContainer.textContent = '';
+//                          boardsContainer.insertAdjacentHTML("beforeend", boardList);
+//                  }
+                 dom.loadStatus();
         }
 
         // const outerHtml = `
@@ -55,34 +56,38 @@ export let dom = {
         })
     },
     showStatus: function(statuses){
-    let columnTitle = document.querySelector('.board-columns');
-        let statusImport = `
-            <div class = "board-column">
-            <div class = "board-column-title">${statuses[0].title}</div>
-            <div class = "board-column-content" id="${statuses[0].id}"></div>
-            </div>
-            <div class = "board-column">
-               <div class = "board-column-title">${statuses[1].title} </div>
-                 <div class = "board-column-content" id="${statuses[1].id}"></div>
-               </div>
-               <div class = "board-column">
-               <div class = "board-column-title">${statuses[2].title} </div>
-                 <div class = "board-column-content" id="${statuses[2].id}"></div>
-               </div>
-            <div class = "board-column">
-               <div class = "board-column-title">${statuses[3].title} </div>
-                 <div class = "board-column-content" id="${statuses[3].id}"></div>
-               </div>`
-;
-        columnTitle.insertAdjacentHTML('beforeend',statusImport);
-        dom.loadCards();
+    // let columnTitle = document.querySelector('.board-columns');
+//         let statusImport = `
+// //             <div class = "board-column">
+// //             <div class = "board-column-title">${statuses[0].title}</div>
+// //             <div class = "board-column-content" id="${statuses[0].id}"></div>
+// //             </div>
+// //             <div class = "board-column">
+// //                <div class = "board-column-title">${statuses[1].title} </div>
+// //                  <div class = "board-column-content" id="${statuses[1].id}"></div>
+// //                </div>
+// //                <div class = "board-column">
+// //                <div class = "board-column-title">${statuses[2].title} </div>
+// //                  <div class = "board-column-content" id="${statuses[2].id}"></div>
+// //                </div>
+// //             <div class = "board-column">
+// //                <div class = "board-column-title">${statuses[3].title} </div>
+// //                  <div class = "board-column-content" id="${statuses[3].id}"></div>
+// //                </div>`
+// // ;
+//
+//         let statusImport = `
+//
+//         `;
+//         columnTitle.insertAdjacentHTML('beforeend',statusImport);
+       dom.loadCards();
     },
     loadCards: function () {
         // retrieves cards and makes showCards called
         dataHandler.getBoards(function (boards) {
-            console.log(boards);
             let counter = 0;
             for (let board of boards){
+                console.log(board[counter].id);
                 dataHandler.getCardsByBoardId(board[counter].id,function (cards) {
                     dom.showCards(cards);
                     counter ++;
@@ -94,14 +99,16 @@ export let dom = {
         // shows the cards of a board
         // it adds necessary event listeners also
         let cards_place = document.querySelectorAll('.board-column-content');
-        let boards = document.querySelectorAll('.boards');
+        let boardID = document.querySelectorAll('.board');
         for (let card of cards) {
             for (let card_place of cards_place) {
+                console.log(card_place.id);
                 if (card.status_id == card_place.id) {
                 let cardToImport = `
                 <div class="card">
                 <div class="board-column-title">${card.title}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+                <div class="card-title">${card.title}</div>
                 </div>
                 `;
                 const outerHtml = `
