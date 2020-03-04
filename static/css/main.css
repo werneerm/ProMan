@@ -136,6 +136,6 @@ textarea {
     resize: None;
 }
 .board-add {
-    position: relative;
-    margin-right: 50px;
+    position: static;
+    /*margin-right: 0px;*/
 }
