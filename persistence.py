@@ -71,7 +71,6 @@ def get_boards(cursor, force=False):
 def get_cards_SQL(cursor, board_id):
     cursor.execute("""
     SELECT * FROM cards
-    WHERE board_id=%(board_id)s
     ORDER BY id;
     """, {'board_id': board_id})
     cards = cursor.fetchall()
