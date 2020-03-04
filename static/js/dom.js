@@ -16,34 +16,27 @@ export let dom = {
         // it adds necessary event listeners also
         let boardsContainer = document.querySelector('#boards');
         let boardList = '';
-        // console.log(boards.length);
         let boards_length = boards.length;
+        dom.loadStatus();
         for(let board of boards){
             for (let item=0; item < boards_length; item++) {
-                dom.loadCards(board[item].id);
                 // console.log(board[item]);
                 boardList += `
+                <section class="board">
                 <div class="board-header"><span class="board-title">${board[item].title}</span>
                 </div>
-                <div class="cards" id="${board[item].id}">
-                
-                </div>
+                <div class="board-columns" id="${board[item].id}"></div>
+                </section>
             `;
                  const outerHtml = `
-           <section class="board">
+           <div class ="board-container">
                 ${boardList}
-             </section>
-              `;
+              </div>
+`;
                  // console.log(outerHtml);
              boardsContainer.textContent = '';
              boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
             }
-            // dom.loadCards(board[1].id);
-            // console.log(board[1].title);
-            // boardList += `
-            //     <li>${board.title}</li>
-            // `;
-
         }
 
         // const outerHtml = `
@@ -56,27 +49,68 @@ export let dom = {
         // boardsContainer.textContent = '';
         // boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
     },
-    loadCards: function (boardId) {
-        // retrieves cards and makes showCards called
-        dataHandler.getCardsByBoardId(boardId,function (cards) {
-            dom.showCards(cards)
+    loadStatus: function(){
+        dataHandler.getStatuses(function (statuses) {
+            dom.showStatus(statuses);
         })
+    },
+    showStatus: function(statuses){
+    let columnTitle = document.querySelector('.board-columns');
+        let statusImport = `
+            <div class = "board-column">
+            <div class = "board-column-title">${statuses[0].title}</div>
+            <div class = "board-column-content" id="${statuses[0].id}"></div>
+            </div>
+            <div class = "board-column">
+               <div class = "board-column-title">${statuses[1].title} </div>
+                 <div class = "board-column-content" id="${statuses[1].id}"></div>
+               </div>
+               <div class = "board-column">
+               <div class = "board-column-title">${statuses[2].title} </div>
+                 <div class = "board-column-content" id="${statuses[2].id}"></div>
+               </div>
+            <div class = "board-column">
+               <div class = "board-column-title">${statuses[3].title} </div>
+                 <div class = "board-column-content" id="${statuses[3].id}"></div>
+               </div>`
+;
+        columnTitle.insertAdjacentHTML('beforeend',statusImport);
+        dom.loadCards();
+    },
+    loadCards: function () {
+        // retrieves cards and makes showCards called
+        dataHandler.getBoards(function (boards) {
+            let counter = 0;
+            for (let board of boards){
+                console.log(board[counter].id);
+                dataHandler.getCardsByBoardId(board[counter].id,function (cards) {
+                    dom.showCards(cards);
+                    counter ++;
+                })
+                }
+        });
     },
     showCards: function (cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        let cards_place = document.querySelectorAll('.cards');
+        let cards_place = document.querySelectorAll('.board-column-content');
         for (let card of cards) {
             for (let card_place of cards_place) {
-            if (card.board_id == card_place.id) {
+                console.log(card_place.id);
+                if (card.status_id == card_place.id) {
                 let cardToImport = `
                 <div class="card">
                 <div class="board-column-title">${card.title}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                <div class="card-title">${card.title}</div>
                 </div>
-                `
-                 card_place.insertAdjacentHTML("beforeend", cardToImport);
+                `;
+                const outerHtml = `
+           <div class ="board-column-title">
+              ${cardToImport}
+              </div>
+                `;
+                   card_place.insertAdjacentHTML("beforeend", outerHtml);
+                 // card_place.insertAdjacentHTML("beforeend", cardToImport);
             }
             }
         }
