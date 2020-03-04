@@ -98,13 +98,19 @@ export let dom = {
     showCards: function (cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        let cards_place = document.querySelectorAll('.board-column-content');
+        let newCard = document.querySelectorAll('.board-column-content');
+        let asd = newCard.getElementById('0');
+
+        let inProgress = document.querySelectorAll("[id^='1']");
+        let testingCard = document.querySelectorAll("[id^='2']");
+        let doneCard = document.querySelectorAll("[id^='3']");
+
+
+        console.log(newCard);
         let boardID = document.querySelectorAll('.board');
         for (let card of cards) {
-            for (let card_place of cards_place) {
-                console.log(card_place.id);
-                if (card.status_id == card_place.id) {
-                let cardToImport = `
+            if(card.board_id == boardID.id){
+                      let cardToImport = `
                 <div class="card">
                 <div class="board-column-title">${card.title}</div>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
@@ -116,8 +122,8 @@ export let dom = {
               ${cardToImport}
               </div>
                 `;
-                card_place.insertAdjacentHTML("beforeend", outerHtml);
-                 card_place.insertAdjacentHTML("beforeend", cardToImport);
+                   // card_place.insertAdjacentHTML("beforeend", outerHtml);
+                 // card_place.insertAdjacentHTML("beforeend", cardToImport);
             }
             }
         }
