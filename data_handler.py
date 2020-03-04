@@ -39,5 +39,4 @@ def get_cards_for_board(board_id):
 
 
 def get_statuses():
-    print(persistence.statuses())
     return persistence.statuses()

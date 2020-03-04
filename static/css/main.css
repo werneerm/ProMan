@@ -127,3 +127,15 @@ section.board{
 .card-title{
     padding-right: 16px;
 }
+textarea {
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    width: 100px;
+    heigth: 20px;
+    resize: None;
+}
+.board-add {
+    position: relative;
+    margin-right: 50px;
+}

@@ -14,6 +14,10 @@ export let dom = {
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
+        console.log(boards);
+        let title = document.querySelector('#titleOne');
+        let importTitle = boards[0][0]['title'];
+        title.innerHTML = importTitle;
         let boardsContainer = document.querySelector('#boards');
         let boardList = '';
         let boards_length = boards.length;
@@ -34,8 +38,8 @@ export let dom = {
               </div>
 `;
                  // console.log(outerHtml);
-             boardsContainer.textContent = '';
-             boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
+             // boardsContainer.textContent = '';
+             // boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
             }
         }
 
@@ -74,7 +78,7 @@ export let dom = {
                  <div class = "board-column-content" id="${statuses[3].id}"></div>
                </div>`
 ;
-        columnTitle.insertAdjacentHTML('beforeend',statusImport);
+        // columnTitle.insertAdjacentHTML('beforeend',statusImport);
         dom.loadCards();
     },
     loadCards: function () {
@@ -96,7 +100,7 @@ export let dom = {
         let cards_place = document.querySelectorAll('.board-column-content');
         for (let card of cards) {
             for (let card_place of cards_place) {
-                console.log(card_place.id);
+                // console.log(card_place.id);
                 if (card.status_id == card_place.id) {
                 let cardToImport = `
                 <div class="card">
@@ -109,7 +113,7 @@ export let dom = {
               ${cardToImport}
               </div>
                 `;
-                   card_place.insertAdjacentHTML("beforeend", outerHtml);
+                   // card_place.insertAdjacentHTML("beforeend", outerHtml);
                  // card_place.insertAdjacentHTML("beforeend", cardToImport);
             }
             }
