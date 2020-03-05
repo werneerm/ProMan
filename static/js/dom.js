@@ -176,12 +176,15 @@ export let dom = {
         //     cards_place[cards_array[coordinate].status_id].insertAdjacentHTML("beforeend", cardToReallyImport);
         }
 
-        let btn = document.querySelector('button');
-        btn.addEventListener('click', (ev)=>{
+        let btn = document.querySelectorAll('.board-add');
+        console.log(btn);
+        for (let fos=0; fos < btn.length; fos++) {
+        btn[fos].addEventListener('click', (ev)=>{
             dataHandler.createNewCard('added card', 1, 0, function (boardID) {
                 dom.doNothing();
             });
         });
+        }
         // console.log(cards_array);
         // for (let good_card in cards_array) {
         //     // console.log(good_card);
