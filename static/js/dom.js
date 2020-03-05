@@ -177,7 +177,6 @@ export let dom = {
         }
 
         let btn = document.querySelectorAll('.board-add');
-        console.log(btn);
         for (let fos=0; fos < btn.length; fos++) {
         btn[fos].addEventListener('click', (ev)=>{
             dataHandler.createNewCard('added card', 1, 0, function (boardID) {
