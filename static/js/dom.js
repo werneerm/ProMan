@@ -93,7 +93,7 @@ export let dom = {
                           let cardToImport = `
                         <div class="card" draggable="true" ondragstart="drag(event)">
                         <div class="card-remove" id="${card.id}"><img src="/static/bin.png" alt="Bin" width="20"></div>
-                        <div> <span class="card-title" ><textarea placeholder= "${card.title}" {color:#FFFFFF} class="Card_textarea" ></textarea> </span> </div>
+                        <div> <span class="card-title"><textarea placeholder="${card.title}" id="${card.id}" {color:#FFFFFF} class="Card_textarea"></textarea></span></div>
                         </div>
                         `;
             card_place.insertAdjacentHTML('beforeend',cardToImport);
@@ -129,6 +129,16 @@ export let dom = {
                 dataHandler.deleteCard(cardNum, function () {
                     dom.doNothing();
                 });
+            })
+        }
+        let cardTxtarea = document.querySelectorAll('.Card_textarea');
+        for (let cardTxtNum=0; cardTxtNum < cardTxtarea.length; cardTxtNum++) {
+            cardTxtarea[cardTxtNum].addEventListener('blur', (ev)=>{
+                let cardIndex = cardTxtarea[cardTxtNum].id;
+                let newTitle = ev.target.value;
+                dataHandler.changeCard(cardIndex, newTitle, function () {
+                    dom.doNothing();
+                })
             })
         }
 

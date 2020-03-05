@@ -109,3 +109,11 @@ def deleteCard(cursor, id):
     DELETE FROM cards
     WHERE id=%(id)s;
     """, {'id': id})
+
+@connection.connection_handler
+def changeCard(cursor, id, title):
+    cursor.execute("""
+    UPDATE cards
+    SET title=%(title)s
+    WHERE id=%(id)s
+    """, {'id': id, 'title': title})

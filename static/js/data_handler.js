@@ -104,5 +104,18 @@ export let dataHandler = {
         })()
         .then(response => {callback()});
     },
+    changeCard: function (cardID, title, callback) {
+        (async () => {
+          const rawResponse = await fetch('/changeCard', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: cardID, title: title})
+          });
+        })()
+        .then(response => {callback()});
+    }
 
 };

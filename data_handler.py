@@ -49,3 +49,6 @@ def changeBoardTitle(id, title):
 
 def deleteCard(id):
     persistence.deleteCard(id)
+
+def changeCard(id, title):
+    persistence.changeCard(id, title)
