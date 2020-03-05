@@ -177,10 +177,11 @@ export let dom = {
         }
 
         let btn = document.querySelectorAll('.board-add');
-        console.log(btn);
-        for (let fos=0; fos < btn.length; fos++) {
-        btn[fos].addEventListener('click', (ev)=>{
-            dataHandler.createNewCard('added card', 1, 0, function (boardID) {
+
+        for (let addCard=0; addCard < btn.length; addCard++) {
+        btn[addCard].addEventListener('click', (ev)=>{
+            let boardNum = addCard + 1;
+            dataHandler.createNewCard('added card', boardNum, 0, function (boardID) {
                 dom.doNothing();
             });
         });
