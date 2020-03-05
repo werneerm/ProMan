@@ -79,13 +79,7 @@ export let dataHandler = {
     },
     // here comes more features
     changeBoardTitle: function () {
-            let textareas = document.querySelectorAll('.boardTitle')
-            for (let num=0; num < textareas.length; num++) {
-                textareas[num].addEventListener('blur', (event)=>{
-                    let change = event.target.value;
-                    console.log(change);
-                })
-            }
-        },
+
+    }
 
 };

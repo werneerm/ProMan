@@ -28,8 +28,8 @@ export let dom = {
             boardsContainer.appendChild(cln);
             let clnPlace = document.getElementById(cln.id);
             boardList=`
-             <div class="board-header"><span class="board-title"><text id="titleOne">
-            </text></span>
+             <div class="board-header"><span class="board-title"><textarea class="textarea" id="titleOne" >"${boards[0][0]['title']}"
+            </textarea></span>
                 <button class="board-add">Add Card</button>
                 <button class="board-toggle"><i class="fas fa-chevron-down"></i></button>
             </div>
@@ -183,6 +183,11 @@ export let dom = {
                 dom.doNothing();
             });
         });
+        }
+
+        let txtarea = document.querySelectorAll('.textarea');
+        for (let index=0; index < txtarea.length; index++) {
+
         }
         // console.log(cards_array);
         // for (let good_card in cards_array) {

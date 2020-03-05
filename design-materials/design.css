@@ -92,6 +92,8 @@ section.board{
 
 .card{
     position: relative;
+    /*display: flex;*/
+    /*flex-wrap: nowrap;*/
     background: #222;
     color: #fff;
     border-radius: var(--border-radius);
