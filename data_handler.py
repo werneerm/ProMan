@@ -46,3 +46,6 @@ def createNewCard(title, boardID, statusID):
 
 def changeBoardTitle(id, title):
     persistence.changeBoardTitle(id, title)
+
+def deleteCard(id):
+    persistence.deleteCard(id)

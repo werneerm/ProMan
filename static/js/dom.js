@@ -135,7 +135,7 @@ export let dom = {
             let card_place = document.getElementById(statuses[card.status_id].title+card.board_id);
                           let cardToImport = `
                         <div class="card" draggable="true" ondragstart="drag(event)">
-                        <div class="card-remove"><img src="/static/bin.png" alt="Bin" width="20"></div>
+                        <div class="card-remove" id="${card.id}"><img src="/static/bin.png" alt="Bin" width="20"></div>
                         <div class="card-title">${card.title}</div>
                         </div>
                         `;
@@ -190,11 +190,21 @@ export let dom = {
         for (let index=0; index < txtarea.length; index++) {
             txtarea[index].addEventListener('blur', (ev)=>{
                 let boardNum2 = index + 1;
-                console.log(ev.target.value);
                 let new_title = ev.target.value;
                 dataHandler.changeBoardTitle(boardNum2, new_title, function () {
                     dom.doNothing();
                 })
+            })
+        }
+        let deleteButton = document.querySelectorAll('.card-remove');
+        for (let index2=0; index2 < deleteButton.length; index2++) {
+            deleteButton[index2].addEventListener('click', (ev) => {
+                console.log(deleteButton[index2]);
+                let cardNum = deleteButton[index2].id;
+                console.log(cardNum);
+                dataHandler.deleteCard(cardNum, function () {
+                    dom.doNothing();
+                });
             })
         }
         // console.log(cards_array);
@@ -229,7 +239,7 @@ export let dom = {
         // }
     },
     doNothing: function () {
-        // window.location.reload()
+        window.location.reload()
     }
     // here comes more features
 };

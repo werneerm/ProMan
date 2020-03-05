@@ -102,3 +102,10 @@ def changeBoardTitle(cursor, id, title):
     SET title=%(title)s
     WHERE id=%(id)s
     """, {'id': id, 'title': title})
+
+@connection.connection_handler
+def deleteCard(cursor, id):
+    cursor.execute("""
+    DELETE FROM cards
+    WHERE id=%(id)s;
+    """, {'id': id})
