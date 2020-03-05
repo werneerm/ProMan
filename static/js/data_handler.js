@@ -90,6 +90,19 @@ export let dataHandler = {
           });
         })()
         .then(response => {callback()});
-    }
+    },
+    deleteCard: function (cardID, callback) {
+        (async () => {
+          const rawResponse = await fetch('/deleteCard', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: cardID})
+          });
+        })()
+        .then(response => {callback()});
+    },
 
 };

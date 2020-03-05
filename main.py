@@ -66,5 +66,13 @@ def changeBoardTitle():
     return 'allright'
 
 
+@app.route('/deleteCard', methods = ['POST'])
+def deleteCard():
+    json_body = request.json
+    print(json_body['id'])
+    data_handler.deleteCard(json_body['id'])
+    return 'allright'
+
+
 if __name__ == '__main__':
     main()
