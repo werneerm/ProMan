@@ -40,3 +40,7 @@ def get_cards_for_board(board_id):
 
 def get_statuses():
     return persistence.statuses()
+
+def createNewCard(title, boardID, statusID):
+    # persistence.createNewCard(title, boardID, statusID)
+    pass

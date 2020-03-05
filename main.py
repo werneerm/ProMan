@@ -1,5 +1,4 @@
-
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from util import json_response
 
 import data_handler
@@ -53,6 +52,13 @@ def get_status_for_card(status_id: int):
 @json_response
 def get_all_status():
     return data_handler.get_statuses()
+
+@app.route('/createNewCard', methods = ['POST'])
+def createNewCard():
+    json_body = request.json
+    data_handler.createNewCard(json_body['title'], json_body['boardID'], json_body['statusID'])
+    return 'allright'
+
 
 if __name__ == '__main__':
     main()
