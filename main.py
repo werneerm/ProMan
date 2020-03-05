@@ -59,6 +59,12 @@ def createNewCard():
     data_handler.createNewCard(json_body['title'], json_body['boardID'], json_body['statusID'])
     return 'allright'
 
+@app.route('/changeBoardTitle', methods = ['POST'])
+def changeBoardTitle():
+    json_body = request.json
+    data_handler.changeBoardTitle(json_body['id'], json_body['title'])
+    return 'allright'
+
 
 if __name__ == '__main__':
     main()

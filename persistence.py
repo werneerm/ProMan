@@ -94,3 +94,11 @@ def createNewCard(cursor, title, boardID, statusID):
     INSERT INTO cards (board_id, title, status_id)
     VALUES (%(boardID)s, %(title)s, %(statusID)s);
     """, {'title': title, 'boardID': boardID, 'statusID': statusID})
+
+@connection.connection_handler
+def changeBoardTitle(cursor, id, title):
+    cursor.execute("""
+    UPDATE boards
+    SET title=%(title)s
+    WHERE id=%(id)s
+    """, {'id': id, 'title': title})
