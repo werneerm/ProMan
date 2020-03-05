@@ -135,7 +135,7 @@ export let dom = {
             let card_place = document.getElementById(statuses[card.status_id].title+card.board_id);
                           let cardToImport = `
                         <div class="card" draggable="true" ondragstart="drag(event)">
-                        <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+                        <div class="card-remove"><img src="/static/bin.png" alt="Bin" width="20"></div>
                         <div class="card-title">${card.title}</div>
                         </div>
                         `;
