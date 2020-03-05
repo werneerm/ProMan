@@ -179,7 +179,7 @@ export let dom = {
         let btn = document.querySelector('button');
         btn.addEventListener('click', (ev)=>{
             dataHandler.createNewCard('added card', 1, 0, function (boardID) {
-                dom.loadCards();
+                dom.doNothing();
             });
         });
         // console.log(cards_array);
