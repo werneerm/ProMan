@@ -12,21 +12,21 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-{#        <script>#}
-{#        function allowDrop(ev) {#}
-{#          ev.preventDefault();#}
-{#        }#}
-{##}
-{#        function drag(ev) {#}
-{#          ev.dataTransfer.setData("text", ev.target.class);#}
-{#        }#}
-{##}
-{#        function drop(ev) {#}
-{#          ev.preventDefault();#}
-{#          var data = ev.dataTransfer.getData("text");#}
-{#          ev.target.appendChild(document.getElementsByClassName(data));#}
-{#        }#}
-{#        </script>#}
+        <script>
+        function allowDrop(ev) {
+          ev.preventDefault();
+        }
+
+        function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.class);
+        }
+
+        function drop(ev) {
+          ev.preventDefault();
+          var data = ev.dataTransfer.getData("text");
+          ev.target.appendChild(document.querySelectorAll(data));
+        }
+        </script>
     </head>
 <body>
         <h1>ProMan</h1>
