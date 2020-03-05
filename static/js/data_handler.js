@@ -78,8 +78,18 @@ export let dataHandler = {
 
     },
     // here comes more features
-    changeBoardTitle: function () {
-
+    changeBoardTitle: function (boardID, title, callback) {
+        (async () => {
+          const rawResponse = await fetch('/changeBoardTitle', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: boardID, title: title})
+          });
+        })()
+        .then(response => {callback()});
     }
 
 };

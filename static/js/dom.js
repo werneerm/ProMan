@@ -28,7 +28,7 @@ export let dom = {
             boardsContainer.appendChild(cln);
             let clnPlace = document.getElementById(cln.id);
             boardList=`
-             <div class="board-header"><span class="board-title"><textarea class="textarea" id="titleOne" >"${boards[0][0]['title']}"
+             <div class="board-header"><span class="board-title"><textarea class="textarea" id="titleOne" >${boards[0][1]['title']}
             </textarea></span>
                 <button class="board-add">Add Card</button>
                 <button class="board-toggle"><i class="fas fa-chevron-down"></i></button>
@@ -177,9 +177,10 @@ export let dom = {
         }
 
         let btn = document.querySelectorAll('.board-add');
-        for (let fos=0; fos < btn.length; fos++) {
-        btn[fos].addEventListener('click', (ev)=>{
-            dataHandler.createNewCard('added card', 1, 0, function (boardID) {
+        for (let addCard=0; addCard < btn.length; addCard++) {
+        btn[addCard].addEventListener('click', (ev)=>{
+            let boardNum = addCard + 1;
+            dataHandler.createNewCard('added card', boardNum, 0, function (boardID) {
                 dom.doNothing();
             });
         });
@@ -187,7 +188,14 @@ export let dom = {
 
         let txtarea = document.querySelectorAll('.textarea');
         for (let index=0; index < txtarea.length; index++) {
-
+            txtarea[index].addEventListener('blur', (ev)=>{
+                let boardNum2 = index + 1;
+                console.log(ev.target.value);
+                let new_title = ev.target.value;
+                dataHandler.changeBoardTitle(boardNum2, new_title, function () {
+                    dom.doNothing();
+                })
+            })
         }
         // console.log(cards_array);
         // for (let good_card in cards_array) {
@@ -221,7 +229,7 @@ export let dom = {
         // }
     },
     doNothing: function () {
-        window.location.reload()
+        // window.location.reload()
     }
     // here comes more features
 };
