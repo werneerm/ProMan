@@ -64,6 +64,18 @@ export let dataHandler = {
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+        (async () => {
+          const rawResponse = await fetch('/createNewCard', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({title: cardTitle, boardID: boardId, statusID: statusId})
+          });
+        })()
+        .then(response => {callback()});
+
     },
     // here comes more features
     changeBoardTitle: function () {
@@ -75,4 +87,5 @@ export let dataHandler = {
                 })
             }
         },
+
 };
