@@ -7,7 +7,7 @@ export let dom = {
     },
     loadBoards: function () {
         // retrieves boards and makes showBoards called
-        dataHandler.getBoards(function(boards){
+        dataHandler.getBoards(function (boards) {
             dom.showBoards(boards);
         });
     },
@@ -21,12 +21,12 @@ export let dom = {
         let boardList = '';
         let boards_length = boards.length;
         let fullBoard = document.querySelector('.board');
-        for(let item =1; item < boards.length; item++){
-                 // for (let item = 0; item < boards_length; item++) {
-                     let cln = fullBoard.cloneNode(true);
-                     cln.id = item+1;
-                     boardsContainer.appendChild(cln);
-                     // console.log(board[item]);
+        for (let item = 1; item < boards.length; item++) {
+            // for (let item = 0; item < boards_length; item++) {
+            let cln = fullBoard.cloneNode(true);
+            cln.id = item + 1;
+            boardsContainer.appendChild(cln);
+            // console.log(board[item]);
 //                          boardList += `
 //                 <div class="board-header"><span class="board-title">${board[item].title}</span>
 //                 </div>
@@ -37,7 +37,7 @@ export let dom = {
 //                          boardsContainer.textContent = '';
 //                          boardsContainer.insertAdjacentHTML("beforeend", boardList);
 //                  }
-                 dom.loadStatus();
+            dom.loadStatus();
         }
 
         // const outerHtml = `
@@ -50,13 +50,13 @@ export let dom = {
         // boardsContainer.textContent = '';
         // boardsContainer.insertAdjacentHTML("beforeend", outerHtml);
     },
-    loadStatus: function(){
+    loadStatus: function () {
         dataHandler.getStatuses(function (statuses) {
             dom.showStatus(statuses);
         })
     },
-    showStatus: function(statuses){
-    // let columnTitle = document.querySelector('.board-columns');
+    showStatus: function (statuses) {
+        // let columnTitle = document.querySelector('.board-columns');
 //         let statusImport = `
 // //             <div class = "board-column">
 // //             <div class = "board-column-title">${statuses[0].title}</div>
@@ -80,72 +80,106 @@ export let dom = {
 //
 //         `;
 //         columnTitle.insertAdjacentHTML('beforeend',statusImport);
-       dom.loadCards();
+        dom.loadCards();
     },
     loadCards: function () {
         // retrieves cards and makes showCards called
         dataHandler.getBoards(function (boards) {
             let counter = 0;
-            for (let board of boards){
-                // console.log(board[counter].id);
-                dataHandler.getCardsByBoardId(board[counter].id,function (cards) {
+            for (let board of boards) {
+                dataHandler.getCardsByBoardId(board[counter].id, function (cards) {
                     dom.showCards(cards);
-                    counter ++;
+                    counter++;
                 })
-                }
+            }
         });
     },
     showCards: function (cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        let newCard = document.querySelectorAll('.board-column-content');
-        // let content = newCard.getElementById('0');
-        let newCard_id = newCard[0].id;
-        let inProgress_id = newCard[1].id;
-        let testingCard_id = newCard[2].id;
-        let doneCard_id = newCard[3].id;
-        // let inProgress = document.querySelectorAll("[id^='1']");
-        // let testingCard = document.querySelectorAll("[id^='2']");
-        // let doneCard = document.querySelectorAll("[id^='3']");
+        let cards_place = document.querySelectorAll('.board-column-content');
+        let sections = document.querySelectorAll('section');
+        let columns = document.querySelectorAll('.board-column')
+        // console.log(boardID);
+        let cards_array = [];
+        let board_array = [];
+        let cardToReallyImport;
+        let coordinate;
+        for (let num = 0; num < sections.length; num++) {
+            for (let num_of_cards = 0; num_of_cards < cards.length; num_of_cards++) {
+                if (sections[num].id == cards[num_of_cards].board_id) {
+                    // console.log(cards[num_of_cards].board_id);
+                    cards_array.push(cards[num_of_cards]);
+                }
+            }
+            board_array.push(num + 1);
+        }
+        // console.log(cards_array);
+        for (let good_card_num = 0; good_card_num < cards_array.length; good_card_num++) {
+            for (let column_of_num = 0; column_of_num < columns.length; column_of_num++) {
+                //&& cards_array[good_card_num].board_id == board_array[0]
+                if (cards_array[good_card_num].status_id == columns[column_of_num].dataset.status) {
+                    // console.log("fos");
+                    let cardToImport = `
+                        <div class="card" draggable="true" ondragstart="drag(event)">
+                        <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+                        <div class="card-title">${cards_array[good_card_num].title} | ${cards_array[good_card_num].board_id}</div>
+                        </div>
+                        `;
+                    cardToReallyImport = cardToImport;
+                }
+            }
+            coordinate = good_card_num;
+            cards_place[cards_array[coordinate].status_id].insertAdjacentHTML("beforeend", cardToReallyImport);
+        }
 
-        let boardID = document.querySelectorAll('.board');
-        for (let card of cards) {
-            if(card.board_id == boardID.id){
-                let goodCard = card;
-                    for ()
-                      let cardToImport = `
-                <div class="card">
-                <div class="board-column-title">${card.title}</div>
-                <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                <div class="card-title">${card.title}</div>
-                </div>
-                `;
-                const outerHtml = `
-           <div class ="board-column-title">
-              ${cardToImport}
-              </div>
-                `;
 
-           //  for (let card_place of cards_place) {
-           //      console.log(card_place.id);
-           //      if (card.status_id == card_place.id) {
-           //      let cardToImport = `
-           //      <div class="card">
-           //      <div class="board-column-title">${card.title}</div>
-           //      <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-           //      <div class="card-title">${card.title}</div>
-           //      </div>
-           //      `;
-           //      const outerHtml = `
-           // <div class ="board-column-title">
-           //    ${cardToImport}
-           //    </div>
-           //      `;
-           //         card_place.insertAdjacentHTML("beforeend", outerHtml);
-           //       // card_place.insertAdjacentHTML("beforeend", cardToImport);
-           //  }
+        let btn = document.querySelector('button');
+        btn.addEventListener('click', (ev)=>{
+            dataHandler.createNewCard('added card', 1, 0, function (boardID) {
+                dom.loadCards();
+            });
+        });
+        // console.log(cards_array);
+        // for (let good_card in cards_array) {
+        //     // console.log(good_card);
+        //     for (let column in columns){
+        //     if (good_card.status_id == column.dataset.status) {
+        //         console.log("fos");
+        //         let cardToImport = `
+        //     <div class="card">
+        //     <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+        //     <div class="card-title">${card.title}</div>
+        //     </div>
+        //     `;
+        //         cards_place[good_card.status_id].insertAdjacentHTML("beforeend", cardToImport);
+        //     }
+        //     }
+        //     }
+        // for (let card of cards) {
+        //     for (let card_place of cards_place) {
+        //         if (card.status_id == card_place.id) {
+        //         let cardToImport = `
+        //         <div class="card">
+        //         <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+        //         <div class="card-title">${card.title}</div>
+        //         </div>
+        //         `;
+        //            // card_place.insertAdjacentHTML("beforeend", outerHtml);
+        //          // card_place.insertAdjacentHTML("beforeend", cardToImport);
+        //     }
+        //     }
+        // }
+    },
+    showNewCard: function (boardID) {
+        let boards = document.querySelectorAll('.board');
+        let copied_board;
+        for (let num_of_boards=0; num_of_boards < boards.length; num_of_boards++) {
+            if (boards[num_of_boards].id == boardID) {
+                copied_board = boards[num_of_boards];
             }
         }
-    },
+        console.log(copied_board);              /////////     EZ AZ EGÉSZ MICSODA?!?!?!?!
+    }
     // here comes more features
 };

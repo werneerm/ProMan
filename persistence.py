@@ -71,7 +71,6 @@ def get_boards(cursor, force=False):
 def get_cards_SQL(cursor, board_id):
     cursor.execute("""
     SELECT * FROM cards
-    WHERE board_id=%(board_id)s
     ORDER BY id;
     """, {'board_id': board_id})
     cards = cursor.fetchall()
@@ -88,3 +87,10 @@ def statuses(cursor):
 
     all_status = cursor.fetchall()
     return all_status
+
+@connection.connection_handler
+def createNewCard(cursor, title, boardID, statusID):
+    cursor.execute("""
+    INSERT INTO cards (board_id, title, status_id)
+    VALUES (%(boardID)s, %(title)s, %(statusID)s);
+    """, {'title': title, 'boardID': boardID, 'statusID': statusID})
