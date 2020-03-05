@@ -176,7 +176,12 @@ export let dom = {
         //     cards_place[cards_array[coordinate].status_id].insertAdjacentHTML("beforeend", cardToReallyImport);
         }
 
-        // });
+        let btn = document.querySelector('button');
+        btn.addEventListener('click', (ev)=>{
+            dataHandler.createNewCard('added card', 1, 0, function (boardID) {
+                dom.loadCards();
+            });
+        });
         // console.log(cards_array);
         // for (let good_card in cards_array) {
         //     // console.log(good_card);
@@ -207,12 +212,6 @@ export let dom = {
         //     }
         //     }
         // }
-        let btn = document.querySelector('.board-add');
-        btn.addEventListener('click', (ev)=>{
-            dataHandler.createNewCard('added card', 1, 0, function (boardID) {
-                dom.doNothing();
-            });
-        });
     },
     doNothing: function () {
         window.location.reload()

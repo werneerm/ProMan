@@ -6,7 +6,7 @@ def get_connection_string():
     # setup connection string
     # to do this, please define these environment variables first
     user_name = ('adam')
-    password = ('madafaka911')
+    password = ('filekezgya25')
     host = ('localhost')
     database_name =('proman')
 
