@@ -43,3 +43,6 @@ def get_statuses():
 
 def createNewCard(title, boardID, statusID):
     persistence.createNewCard(title, boardID, statusID)
+
+def changeBoardTitle(id, title):
+    persistence.changeBoardTitle(id, title)

@@ -135,10 +135,8 @@ export let dom = {
             let card_place = document.getElementById(statuses[card.status_id].title+card.board_id);
                           let cardToImport = `
                         <div class="card" draggable="true" ondragstart="drag(event)">
-                        <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                        <div> <span class="card-title" ><textarea placeholder= "${card.title}" {color:#FFFFFF} class="Card_textarea" ></textarea> </span> </div>
-                        </div>
-                        `;
+                        <div class="card-remove"><img src="/static/bin.png" alt="Bin" width="20"></div>
+                        <div> <span class="card-title" ><textarea placeholder= "${card.title}" {color:#FFFFFF} class="Card_textarea" ></textarea> </span> </div>                        `;
             card_place.insertAdjacentHTML('beforeend',cardToImport)
 
         // let sections = document.querySelectorAll('section');
@@ -177,13 +175,25 @@ export let dom = {
         }
 
         let btn = document.querySelectorAll('.board-add');
-        console.log(btn);
-        for (let fos=0; fos < btn.length; fos++) {
-        btn[fos].addEventListener('click', (ev)=>{
-            dataHandler.createNewCard('added card', 1, 0, function (boardID) {
+        for (let addCard=0; addCard < btn.length; addCard++) {
+        btn[addCard].addEventListener('click', (ev)=>{
+            let boardNum = addCard + 1;
+            dataHandler.createNewCard('added card', boardNum, 0, function (boardID) {
                 dom.doNothing();
             });
         });
+        }
+
+        let txtarea = document.querySelectorAll('.textarea');
+        for (let index=0; index < txtarea.length; index++) {
+            txtarea[index].addEventListener('blur', (ev)=>{
+                let boardNum2 = index + 1;
+                console.log(ev.target.value);
+                let new_title = ev.target.value;
+                dataHandler.changeBoardTitle(boardNum2, new_title, function () {
+                    dom.doNothing();
+                })
+            })
         }
         // console.log(cards_array);
         // for (let good_card in cards_array) {
@@ -217,7 +227,7 @@ export let dom = {
         // }
     },
     doNothing: function () {
-        window.location.reload()
+        // window.location.reload()
     }
     // here comes more features
 };
