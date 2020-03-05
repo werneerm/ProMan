@@ -127,7 +127,7 @@ section.board{
 .card-title{
     padding-right: 16px;
 }
-.textarea {
+.Border_textarea{
     background-color: rgba(0, 0, 0, 0);
     border: none;
     outline: none;
@@ -138,6 +138,23 @@ section.board{
     font-family: sans-serif;
     font-size: 100%;
 
+}
+
+.Card_textarea{
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    position: absolute;
+    width: 180px;
+    max-height: 20px;
+    resize: None;
+    font-family: sans-serif;
+    font-size: 100%;
+
+}
+::-webkit-input-placeholder {
+  color: white;
 }
 .board-add {
     position: relative;

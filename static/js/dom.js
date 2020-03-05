@@ -28,7 +28,7 @@ export let dom = {
             boardsContainer.appendChild(cln);
             let clnPlace = document.getElementById(cln.id);
             boardList=`
-             <div class="board-header"><span class="board-title"><textarea class="textarea" id="titleOne" >${boards[0][1]['title']}
+             <div class="board-header"><span class="board-title"><textarea class="Border_textarea" id="titleOne" >${boards[0][0]['title']}
             </textarea></span>
                 <button class="board-add">Add Card</button>
                 <button class="board-toggle"><i class="fas fa-chevron-down"></i></button>
@@ -93,7 +93,7 @@ export let dom = {
                           let cardToImport = `
                         <div class="card" draggable="true" ondragstart="drag(event)">
                         <div class="card-remove" id="${card.id}"><img src="/static/bin.png" alt="Bin" width="20"></div>
-                        <div class="card-title">${card.title}</div>
+                        <div> <span class="card-title" ><textarea placeholder= "${card.title}" {color:#FFFFFF} class="Card_textarea" ></textarea> </span> </div>
                         </div>
                         `;
             card_place.insertAdjacentHTML('beforeend',cardToImport);
