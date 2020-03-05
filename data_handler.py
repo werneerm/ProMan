@@ -42,5 +42,4 @@ def get_statuses():
     return persistence.statuses()
 
 def createNewCard(title, boardID, statusID):
-    # persistence.createNewCard(title, boardID, statusID)
-    pass
+    persistence.createNewCard(title, boardID, statusID)
