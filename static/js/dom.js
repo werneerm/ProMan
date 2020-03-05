@@ -134,52 +134,15 @@ export let dom = {
         }
 
 
-        let btn = document.querySelector('button');
+        let btn = document.querySelector('.board-add');
         btn.addEventListener('click', (ev)=>{
             dataHandler.createNewCard('added card', 1, 0, function (boardID) {
-                dom.loadCards();
+                dom.doNothing();
             });
         });
-        // console.log(cards_array);
-        // for (let good_card in cards_array) {
-        //     // console.log(good_card);
-        //     for (let column in columns){
-        //     if (good_card.status_id == column.dataset.status) {
-        //         console.log("fos");
-        //         let cardToImport = `
-        //     <div class="card">
-        //     <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-        //     <div class="card-title">${card.title}</div>
-        //     </div>
-        //     `;
-        //         cards_place[good_card.status_id].insertAdjacentHTML("beforeend", cardToImport);
-        //     }
-        //     }
-        //     }
-        // for (let card of cards) {
-        //     for (let card_place of cards_place) {
-        //         if (card.status_id == card_place.id) {
-        //         let cardToImport = `
-        //         <div class="card">
-        //         <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-        //         <div class="card-title">${card.title}</div>
-        //         </div>
-        //         `;
-        //            // card_place.insertAdjacentHTML("beforeend", outerHtml);
-        //          // card_place.insertAdjacentHTML("beforeend", cardToImport);
-        //     }
-        //     }
-        // }
     },
-    showNewCard: function (boardID) {
-        let boards = document.querySelectorAll('.board');
-        let copied_board;
-        for (let num_of_boards=0; num_of_boards < boards.length; num_of_boards++) {
-            if (boards[num_of_boards].id == boardID) {
-                copied_board = boards[num_of_boards];
-            }
-        }
-        console.log(copied_board);              /////////     EZ AZ EGÉSZ MICSODA?!?!?!?!
+    doNothing: function () {
+        console.log("kutya")
     }
     // here comes more features
 };
