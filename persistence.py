@@ -117,3 +117,11 @@ def changeCard(cursor, id, title):
     SET title=%(title)s
     WHERE id=%(id)s
     """, {'id': id, 'title': title})
+
+@connection.connection_handler
+def change_status_of_a_card(cursor,card_id,status_id):
+    cursor.execute("""
+    UPDATE cards
+    SET status_id = %(status_id)s
+    WHERE id = %(card_id)s
+    """, {'card_id': card_id, 'status_id': status_id})

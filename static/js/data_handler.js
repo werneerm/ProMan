@@ -116,6 +116,21 @@ export let dataHandler = {
           });
         })()
         .then(response => {callback()});
+    },
+    dragAndDrop: function (cardId,statusId,callback) {
+        (async () => {
+            const rawResponse = await fetch('/dragndrop', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({cardId: cardId, statusId: statusId})
+            });
+        })()
+            .then(response => {
+                callback(response)
+            })
     }
 
 };

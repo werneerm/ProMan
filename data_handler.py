@@ -52,3 +52,6 @@ def deleteCard(id):
 
 def changeCard(id, title):
     persistence.changeCard(id, title)
+
+def change_card_status(card_id,status_id):
+    return persistence.change_status_of_a_card(card_id,status_id)
