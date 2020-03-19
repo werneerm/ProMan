@@ -205,13 +205,16 @@ export let dom = {
         let columnsContents = document.querySelectorAll('.board-column-content');
         let cardsToDrag = document.querySelectorAll('.card');
         for (let num=0; num < cardsToDrag.length; num++) {
+            console.log(cardsToDrag[num])
             cardsToDrag[num].addEventListener('dragstart', (event) => {
                 event.dataTransfer.setData("text", event.target.id);
             });
-            columnsContents[num].addEventListener('dragover', (event) =>{
+        };
+        for (let kaka=0; kaka < columnsContents.length; kaka++) {
+            columnsContents[kaka].addEventListener('dragover', (event) =>{
                 allowDrop(event)
             });
-            columnsContents[num].addEventListener('drop', (event) =>{
+            columnsContents[kaka].addEventListener('drop', (event) =>{
                 let fos = event.dataTransfer.getData("text");
                 event.target.appendChild(document.getElementById(fos));
                 let boardColumnContent = event.target.id;
@@ -223,7 +226,6 @@ export let dom = {
                 })
             })
         }
-
     },
     doNothing: function () {
         // window.location.reload()
