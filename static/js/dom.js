@@ -164,10 +164,8 @@ export let dom = {
         let toggleBtn = document.querySelectorAll('.board-toggle');
         for (let btnNum=0; btnNum < toggleBtn.length; btnNum++) {
             toggleBtn[btnNum].addEventListener('click', (ev) => {
-                console.log(btnNum)
                 if (btnNum == 0) {
                     let boardToHide = document.getElementById("hide1")
-                    console.log(boardToHide)
                     if (boardToHide.style.display === 'none') {
                     boardToHide.style.display = 'flex'
                 } else {
@@ -176,7 +174,6 @@ export let dom = {
                 }
                 else if (btnNum == 1) {
                     let boardToHide = document.getElementById("hide2")
-                    console.log(boardToHide)
                     if (boardToHide.style.display === 'none') {
                         boardToHide.style.display = 'flex'
                     } else {
