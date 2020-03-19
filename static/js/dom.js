@@ -223,9 +223,11 @@ export let dom = {
         function allowDrop (event) {
             event.preventDefault();
         }
-        let columnsContents = document.querySelectorAll('.board-column-content')
-        let cardsToDrag = document.querySelectorAll('.card')
+        let columnsContents = document.querySelectorAll('.board-column-content');
+        let cardsToDrag = document.querySelectorAll('.card');
         for (let num=0; num < cardsToDrag.length; num++) {
+            console.log(cardsToDrag[num]);
+            let futyi = cardsToDrag[num];
             cardsToDrag[num].addEventListener('dragstart', (event) => {
                 event.dataTransfer.setData("text", event.target.id);
             });
@@ -235,6 +237,11 @@ export let dom = {
             columnsContents[num].addEventListener('drop', (event) =>{
                 let fos = event.dataTransfer.getData("text");
                 event.target.appendChild(document.getElementById(fos));
+                let boardColumnContent = event.target.id;
+                let cardId = fos ;
+                let boardId = boardColumnContent.slice(-1);
+                let statusId = boardColumnContent.slice(0, -1);
+                dataHandler.dragAndDrop(cardId,statusId,boardId,function (){dom.doNothing()})
             })
         }
 

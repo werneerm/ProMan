@@ -119,9 +119,20 @@ def changeCard(cursor, id, title):
     """, {'id': id, 'title': title})
 
 @connection.connection_handler
-def change_status_of_a_card(cursor,card_id,status_id):
+def change_status_of_a_card(cursor,card_id,status_id,boardId):
     cursor.execute("""
     UPDATE cards
-    SET status_id = %(status_id)s
+    SET status_id = %(status_id)s,board_id = %(boardId)s
     WHERE id = %(card_id)s
-    """, {'card_id': card_id, 'status_id': status_id})
+    """, {'card_id': card_id, 'status_id': status_id,'boardId':boardId})
+
+
+@connection.connection_handler
+def find_status_id(cursor,status):
+    cursor.execute("""
+        SELECT statuses.id
+        FROM statuses
+        WHERE statuses.title = %(status)s
+    """,{'status':status})
+    status_id = cursor.fetchall()
+    return status_id
