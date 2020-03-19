@@ -178,7 +178,6 @@ export let dom = {
         for (let btnNum=0; btnNum < toggleBtn.length; btnNum++) {
             toggleBtn[btnNum].addEventListener('click', (ev) => {
                 if (btnNum == 0) {
-                    console.log(ev.target.className)
                     let boardToHide = document.getElementById("hide1")
                     if (boardToHide.style.display === 'none') {
                     ev.target.className = 'fa fa-chevron-down';
@@ -191,8 +190,10 @@ export let dom = {
                 else if (btnNum == 1) {
                     let boardToHide = document.getElementById("hide2")
                     if (boardToHide.style.display === 'none') {
+                        ev.target.className = 'fa fa-chevron-down';
                         boardToHide.style.display = 'flex'
                     } else {
+                        ev.target.className = 'fa fa-chevron-up';
                         boardToHide.style.display = 'none'
                     }
                 }
@@ -205,7 +206,6 @@ export let dom = {
         let columnsContents = document.querySelectorAll('.board-column-content');
         let cardsToDrag = document.querySelectorAll('.card');
         for (let num=0; num < cardsToDrag.length; num++) {
-            console.log(cardsToDrag[num])
             cardsToDrag[num].addEventListener('dragstart', (event) => {
                 event.dataTransfer.setData("text", event.target.id);
             });
