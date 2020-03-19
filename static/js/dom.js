@@ -16,7 +16,7 @@ export let dom = {
         // it adds necessary event listeners also
         let board_container = document.querySelector('.board-container')
         let first_board = `<section class="board" id="1">
-            <div class="board-header"><span class="board-title"><textarea class="Border_textarea" id="titleOne">
+            <div class="board-header"><span class="board-title"><textarea class="Border_textarea" id="titleOne">${boards[0][0]['title']}
             </textarea></span>
                 <button class="board-add">Add Card</button>
                 <button class="board-toggle"><i class="fa fa-chevron-down"></i></button>
@@ -41,9 +41,6 @@ export let dom = {
             </div>
         </section>`
         board_container.insertAdjacentHTML("beforeend", first_board)
-        // let title = document.querySelector('#titleOne');
-        // title.innerHTML = boards[0][0]['title'];
-        // let boardsContainer = document.querySelector('.board-container');
         let boardList = '';
         let boards_length = boards.length;
         let fullBoard = document.querySelector('.board');
@@ -80,51 +77,6 @@ export let dom = {
             `;
             clnPlace.insertAdjacentHTML("beforeend",boardList);
 
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-        function drag(ev) {
-         let thing = ev.dataTransfer.setData("text", ev.target.id);
-            console.log(thing)
-        }
-        function drop(ev, boardId, columnStatus) {
-            console.log("dolgok: ", boardId, columnStatus);
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            let columnContent = document.getElementById(`${columnStatus}${boardId}`)
-            console.log(columnContent);
-            // {#columnContent.appendChild(ev.target);#}
-            columnContent.parentElement.appendChild(columnContent);
-            switch (columnStatus) {
-                case "new":
-                    console.log("new");
-                    dataHandler.dragAndDrop(data, columnStatus, function () {
-                        dom.doNothing()
-                    });
-                    break;
-
-                case "in progress":
-                    console.log("inprogress");
-                    dataHandler.dragAndDrop(data, columnStatus, function () {
-                        dom.doNothing()
-                    });
-                    break;
-
-                case "testing":
-                    console.log("dsadsa");
-                    dataHandler.dragAndDrop(data, columnStatus, function () {
-                        dom.doNothing()
-                    });
-                    break;
-
-                case "done":
-                    console.log("done");
-                    dataHandler.dragAndDrop(data, columnStatus, function () {
-                        dom.doNothing()
-                    });
-                    break;
-            }
-        }
             dom.loadStatus();
         }
 
@@ -212,7 +164,8 @@ export let dom = {
         let toggleBtn = document.querySelectorAll('.board-toggle');
         for (let btnNum=0; btnNum < toggleBtn.length; btnNum++) {
             toggleBtn[btnNum].addEventListener('click', (ev) => {
-                let boardToHide = event.target.parentElement.parentElement.nextElementSibling
+                let boardToHide = event.target.parentElement.parentElement.nextElementSibling;
+                console.log(boardToHide);
                 if (boardToHide.style.display === 'none') {
                     boardToHide.style.display = 'flex'
                 } else {
@@ -220,6 +173,7 @@ export let dom = {
                 }
             })
         }
+
         function allowDrop (event) {
             event.preventDefault();
         }
@@ -235,21 +189,13 @@ export let dom = {
             columnsContents[num].addEventListener('drop', (event) =>{
                 let fos = event.dataTransfer.getData("text");
                 event.target.appendChild(document.getElementById(fos));
-            })
-        }
+                console.log(event.target.id)
+            });
+        };
 
     },
     doNothing: function () {
         // window.location.reload()
     },
     // here comes more features
-    allowDrop: function (ev) {
-            ev.preventDefault();
-            alert();
-        },
-    drag: function (ev) {
-        alert(ev);
-        let thing = ev.dataTransfer.setData("text", ev.target.id);
-            console.log(thing)
-    },
 };
