@@ -113,7 +113,7 @@ export let dom = {
             let cardToImport = `
                         <div class="card" draggable="true" id="${card.id}">
                         <div class="card-remove" id="${card.id}"><img src="/static/bin.png" alt="Bin" width="20"></div>
-                        <div> <span class="card-title"><textarea placeholder="${card.title}" id="${card.id}" {color:#FFFFFF} class="Card_textarea"></textarea></span></div>
+                        <div> <span class="card-title"><textarea placeholder="${card.title}" id="${card.id}" {color:#FFFFFF} class="Card_textarea">${card.title}</textarea></span></div>
                         </div>
                         `;
             card_place.insertAdjacentHTML('beforeend', cardToImport);
@@ -180,11 +180,14 @@ export let dom = {
         for (let btnNum=0; btnNum < toggleBtn.length; btnNum++) {
             toggleBtn[btnNum].addEventListener('click', (ev) => {
                 if (btnNum == 0) {
+                    console.log(ev.target.className)
                     let boardToHide = document.getElementById("hide1")
                     if (boardToHide.style.display === 'none') {
-                    boardToHide.style.display = 'flex'
+                    ev.target.className = 'fa fa-chevron-down';
+                    boardToHide.style.display = 'flex';
                 } else {
-                    boardToHide.style.display = 'none'
+                    ev.target.className = 'fa fa-chevron-up';
+                    boardToHide.style.display = 'none';
                 }
                 }
                 else if (btnNum == 1) {
