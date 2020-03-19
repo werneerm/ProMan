@@ -75,7 +75,8 @@ section.board{
 }
 
 .board-column-content{
-    min-height: 300px;
+    min-height: auto;
+    padding-bottom: 30px;
 }
 
 .board-column-content:empty{
