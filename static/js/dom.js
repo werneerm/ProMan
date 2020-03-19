@@ -19,9 +19,9 @@ export let dom = {
             <div class="board-header"><span class="board-title"><textarea class="Border_textarea" id="titleOne">${boards[0][0]['title']}
             </textarea></span>
                 <button class="board-add">Add Card</button>
-                <button class="board-toggle"><i class="fa fa-chevron-down"></i></button>
+                <button class="board-toggle" id="1"><i class="fa fa-chevron-down"></i></button>
             </div>
-            <div class="board-columns">
+            <div class="board-columns" id="hide1">
                 <div class="board-column">
                     <div class="board-column-title">New</div>
                     <div class="board-column-content" id="new1"></div>
@@ -42,7 +42,7 @@ export let dom = {
         </section>`
         board_container.insertAdjacentHTML("beforeend", first_board)
         let boardList = '';
-        let boards_length = boards.length;
+        // let boards_length = boards.length;
         let fullBoard = document.querySelector('.board');
         for (let item = 1; item < boards.length; item++) {
             // for (let item = 0; item < boards_length; item++) {
@@ -54,9 +54,9 @@ export let dom = {
              <div class="board-header"><span class="board-title"><textarea class="Border_textarea" id="titleOne" >${boards[0][1]['title']}
             </textarea></span>
                 <button class="board-add">Add Card</button>
-                <button class="board-toggle"><i class="fa fa-chevron-down"></i></button>
+                <button class="board-toggle" id="2"><i class="fa fa-chevron-down"></i></button>
             </div>
-            <div class="board-columns">
+            <div class="board-columns" id="hide2">
                 <div class="board-column">
                     <div class="board-column-title">New</div>
                     <div class="board-column-content" id="new${item+1}"></div>
@@ -164,11 +164,24 @@ export let dom = {
         let toggleBtn = document.querySelectorAll('.board-toggle');
         for (let btnNum=0; btnNum < toggleBtn.length; btnNum++) {
             toggleBtn[btnNum].addEventListener('click', (ev) => {
-                let boardToHide = event.target.parentElement.parentElement.nextElementSibling
-                if (boardToHide.style.display === 'none') {
+                console.log(btnNum)
+                if (btnNum == 0) {
+                    let boardToHide = document.getElementById("hide1")
+                    console.log(boardToHide)
+                    if (boardToHide.style.display === 'none') {
                     boardToHide.style.display = 'flex'
                 } else {
                     boardToHide.style.display = 'none'
+                }
+                }
+                else if (btnNum == 1) {
+                    let boardToHide = document.getElementById("hide2")
+                    console.log(boardToHide)
+                    if (boardToHide.style.display === 'none') {
+                        boardToHide.style.display = 'flex'
+                    } else {
+                        boardToHide.style.display = 'none'
+                    }
                 }
             })
         }
