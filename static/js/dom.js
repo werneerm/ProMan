@@ -40,7 +40,7 @@ export let dom = {
                 </div>
             </div>
         </section>`
-        board_container.insertAdjacentHTML("beforeend", first_board)
+        board_container.innerHTML= first_board;
         let boardList = '';
         // let boards_length = boards.length;
         let fullBoard = document.querySelector('.board');
@@ -125,7 +125,7 @@ export let dom = {
             btn[addCard].addEventListener('click', (ev) => {
                 let boardNum = addCard + 1;
                 dataHandler.createNewCard('added card', boardNum, 0, function (boardID) {
-                    dom.doNothing();
+                    dom.loadBoards();
                 });
             });
         }
@@ -136,7 +136,7 @@ export let dom = {
                 let boardNum2 = index + 1;
                 let new_title = ev.target.value;
                 dataHandler.changeBoardTitle(boardNum2, new_title, function () {
-                    dom.doNothing();
+                    dom.loadBoards();
                 })
             })
         }
@@ -147,7 +147,9 @@ export let dom = {
                 let cardNum = deleteButton[index2].id;
                 console.log(cardNum);
                 dataHandler.deleteCard(cardNum, function () {
-                    dom.doNothing();
+                    // dom.doNothing();
+                    dom.loadBoards();
+
                 });
             })
         }
