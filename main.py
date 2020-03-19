@@ -86,4 +86,5 @@ def dragula():
     return "asd"
 
 if __name__ == '__main__':
-    main()
+    app.run(
+    )
