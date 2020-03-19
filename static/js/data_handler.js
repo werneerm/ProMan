@@ -125,10 +125,9 @@ export let dataHandler = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({cardId: cardId, statusId: statusId, boardId:boardId})
+                body: JSON.stringify({cardId: cardId, statusId: statusId, boardId: boardId})
             });
-        })()
-            .then(response => {
+        })().then(response => {
                 callback(response)
             })
     }

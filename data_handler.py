@@ -60,5 +60,4 @@ def changeCard(id, title):
 
 def change_card_status(card_id,status_id,boardId):
     new_status_id = persistence.find_status_id(status_id)
-    print(new_status_id[0]['id'])
     return persistence.change_status_of_a_card(card_id,new_status_id[0]['id'],boardId)

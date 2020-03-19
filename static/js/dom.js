@@ -114,10 +114,8 @@ export let dom = {
                         <div class="card" draggable="true" id="${card.id}">
                         <div class="card-remove" id="${card.id}"><img src="/static/bin.png" alt="Bin" width="20"></div>
                         <div> <span class="card-title"><textarea placeholder="${card.title}" id="${card.id}" {color:#FFFFFF} class="Card_textarea">${card.title}</textarea></span></div>
-                        </div>
-                        `;
+                        </div>`;
             card_place.insertAdjacentHTML('beforeend', cardToImport);
-
         }
 
         let btn = document.querySelectorAll('.board-add');
@@ -217,10 +215,12 @@ export let dom = {
                 let fos = event.dataTransfer.getData("text");
                 event.target.appendChild(document.getElementById(fos));
                 let boardColumnContent = event.target.id;
-                let cardId = fos ;
+                let cardId = fos;
                 let boardId = boardColumnContent.slice(-1);
                 let statusId = boardColumnContent.slice(0, -1);
-                dataHandler.dragAndDrop(cardId,statusId,boardId,function (){dom.doNothing()})
+                dataHandler.dragAndDrop(cardId,statusId,boardId,function () {
+                    dom.doNothing()
+                })
             })
         }
 

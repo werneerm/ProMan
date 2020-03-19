@@ -82,9 +82,9 @@ def changeCard():
 @app.route('/dragndrop',methods=['POST'])
 def dragula():
     json_body = request.json
+    print(json_body)
     data_handler.change_card_status(json_body['cardId'],json_body['statusId'], int(json_body['boardId']))
     return "asd"
 
 if __name__ == '__main__':
-    app.run(
-    )
+    app.run()
