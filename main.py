@@ -77,11 +77,12 @@ def deleteCard():
 def changeCard():
     json_body = request.json
     data_handler.changeCard(json_body['id'], json_body['title'])
+    return "goodvibes"
 
 @app.route('/dragndrop',methods=['POST'])
 def dragula():
     json_body = request.json
-    data_handler.change_card_status(json_body['cardId'],json_body['statusId'])
+    data_handler.change_card_status(json_body['cardId'],json_body['statusId'], int(json_body['boardId']))
     return "asd"
 
 if __name__ == '__main__':

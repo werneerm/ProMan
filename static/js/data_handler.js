@@ -117,7 +117,7 @@ export let dataHandler = {
         })()
         .then(response => {callback()});
     },
-    dragAndDrop: function (cardId,statusId,callback) {
+    dragAndDrop: function (cardId,statusId,boardId,callback) {
         (async () => {
             const rawResponse = await fetch('/dragndrop', {
                 method: 'POST',
@@ -125,7 +125,7 @@ export let dataHandler = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({cardId: cardId, statusId: statusId})
+                body: JSON.stringify({cardId: cardId, statusId: statusId, boardId:boardId})
             });
         })()
             .then(response => {

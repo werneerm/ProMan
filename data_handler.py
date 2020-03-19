@@ -41,17 +41,24 @@ def get_cards_for_board(board_id):
 def get_statuses():
     return persistence.statuses()
 
+
 def createNewCard(title, boardID, statusID):
     persistence.createNewCard(title, boardID, statusID)
+
 
 def changeBoardTitle(id, title):
     persistence.changeBoardTitle(id, title)
 
+
 def deleteCard(id):
     persistence.deleteCard(id)
+
 
 def changeCard(id, title):
     persistence.changeCard(id, title)
 
-def change_card_status(card_id,status_id):
-    return persistence.change_status_of_a_card(card_id,status_id)
+
+def change_card_status(card_id,status_id,boardId):
+    new_status_id = persistence.find_status_id(status_id)
+    print(new_status_id[0]['id'])
+    return persistence.change_status_of_a_card(card_id,new_status_id[0]['id'],boardId)

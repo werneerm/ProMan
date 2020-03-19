@@ -164,8 +164,7 @@ export let dom = {
         let toggleBtn = document.querySelectorAll('.board-toggle');
         for (let btnNum=0; btnNum < toggleBtn.length; btnNum++) {
             toggleBtn[btnNum].addEventListener('click', (ev) => {
-                let boardToHide = event.target.parentElement.parentElement.nextElementSibling;
-                console.log(boardToHide);
+                let boardToHide = event.target.parentElement.parentElement.nextElementSibling
                 if (boardToHide.style.display === 'none') {
                     boardToHide.style.display = 'flex'
                 } else {
@@ -177,8 +176,8 @@ export let dom = {
         function allowDrop (event) {
             event.preventDefault();
         }
-        let columnsContents = document.querySelectorAll('.board-column-content')
-        let cardsToDrag = document.querySelectorAll('.card')
+        let columnsContents = document.querySelectorAll('.board-column-content');
+        let cardsToDrag = document.querySelectorAll('.card');
         for (let num=0; num < cardsToDrag.length; num++) {
             cardsToDrag[num].addEventListener('dragstart', (event) => {
                 event.dataTransfer.setData("text", event.target.id);
@@ -189,9 +188,13 @@ export let dom = {
             columnsContents[num].addEventListener('drop', (event) =>{
                 let fos = event.dataTransfer.getData("text");
                 event.target.appendChild(document.getElementById(fos));
-                console.log(event.target.id)
-            });
-        };
+                let boardColumnContent = event.target.id;
+                let cardId = fos ;
+                let boardId = boardColumnContent.slice(-1);
+                let statusId = boardColumnContent.slice(0, -1);
+                dataHandler.dragAndDrop(cardId,statusId,boardId,function (){dom.doNothing()})
+            })
+        }
 
     },
     doNothing: function () {
