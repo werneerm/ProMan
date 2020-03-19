@@ -124,7 +124,7 @@ export let dom = {
         for (let addCard = 0; addCard < btn.length; addCard++) {
             btn[addCard].addEventListener('click', (ev) => {
                 let boardNum = addCard + 1;
-                dataHandler.createNewCard('added card', boardNum, 0, function (boardID) {
+                dataHandler.createNewCard('added card', boardNum, 0, function () {
                     dom.loadBoards();
                 });
             });
@@ -135,9 +135,16 @@ export let dom = {
             txtarea[index].addEventListener('blur', (ev) => {
                 let boardNum2 = index + 1;
                 let new_title = ev.target.value;
+                if (new_title == '' || new_title == ' ') {
+                    new_title = 'DefaultName';
+                    dataHandler.changeBoardTitle(boardNum2, new_title, function () {
+                    dom.loadBoards();
+                })
+                } else {
                 dataHandler.changeBoardTitle(boardNum2, new_title, function () {
                     dom.loadBoards();
                 })
+                    }
             })
         }
         let deleteButton = document.querySelectorAll('.card-remove');
@@ -147,7 +154,6 @@ export let dom = {
                 let cardNum = deleteButton[index2].id;
                 console.log(cardNum);
                 dataHandler.deleteCard(cardNum, function () {
-                    // dom.doNothing();
                     dom.loadBoards();
 
                 });
@@ -158,9 +164,16 @@ export let dom = {
             cardTxtarea[cardTxtNum].addEventListener('blur', (ev) => {
                 let cardIndex = cardTxtarea[cardTxtNum].id;
                 let newTitle = ev.target.value;
-                dataHandler.changeCard(cardIndex, newTitle, function () {
-                    dom.doNothing();
+                if (newTitle == '' || newTitle == ' ') {
+                    newTitle = 'DefaultName'
+                    dataHandler.changeCard(cardIndex, newTitle, function () {
+                    dom.loadBoards();
                 })
+                } else {
+                dataHandler.changeCard(cardIndex, newTitle, function () {
+                    dom.loadBoards();
+                })
+                    }
             })
         }
         let toggleBtn = document.querySelectorAll('.board-toggle');
